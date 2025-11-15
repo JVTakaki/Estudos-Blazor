@@ -1,0 +1,107 @@
+﻿@page "/LearnBlazor/BindProp";
+
+<div class="row">
+    <div class="col-6 border p-3">
+        <h3 class="text-primary">Product Playground</h3>
+        Is Active: <input type="checkbox" @bind="@Product.IsActive" /> <br />
+        Input Price:
+        <input type="number" @bind-value="@Product.Price" @bind-value:event="oninput" />
+        <br />
+        Product Properties:
+        <select @bind="selectedProp">
+            @foreach (var prop in @Product.ProductProp)
+            {
+                <option value="@prop.Key">@prop.Key</option>
+            }
+        </select> <br />
+        
+    </div>
+    <div class="col-6 border p-3">
+        <h3 class="text-primary">Product Summary</h3>
+
+        Name : @Product.Name <br />
+        IsActive: @Product.IsActive <br />
+        Price: @Product.Price <br />
+        This product is: @(Product.IsActive ? "Active" : "InActive") <br />
+        Selected Prop: @selectedProp <br />
+        @if (!string.IsNullOrWhiteSpace(selectedProp)){
+            <p>Selected value: @Product.ProductProp.FirstOrDefault(u => u.Key == selectedProp).Value</p>
+        }
+    </div>
+    <div class="col-12 p-4">
+        <h3 class="text-primary-emphasis">Products list</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td>
+                       Product Name
+                    </td>
+                    <td>
+                        Price
+                    </td>
+                    <td>
+                        Is Active
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var product in productsList)
+                {
+                    <tr>
+                        <td>
+                            <input type="text" @bind-value="product.Name" @bind-value:event="oninput" />
+                        </td>
+                        <td>
+                            <input type="number" @bind-value="product.Price" @bind-value:event="oninput" />
+                        </td>
+                        <td>
+                            <input type="checkbox" @bind="product.IsActive" />
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+   
+
+
+
+@code {
+    private string selectedProp = "";
+
+    private List<Product> productsList = new();
+
+    Product Product = new()
+        {
+            IdProduct = 1,
+            Name = "Banana",
+            IsActive = true,
+            Price = 5,
+            ProductProp = new List<ProductProp>()
+            {
+                new ProductProp{Id= 1, Key = "Color", Value = "Blue"},
+                new ProductProp{Id= 1, Key = "Size", Value = "20cm"},
+                new ProductProp{Id= 1, Key = "Flavor", Value = "Banana"}
+            }
+        };
+
+    protected override void OnInitialized()
+    {
+        productsList.Add(Product);
+        productsList.Add(new()
+            {
+                IdProduct = 2,
+                Name = "Apple",
+                IsActive = false,
+                Price = 4,
+                ProductProp = new List<ProductProp>()
+                    {
+                        new ProductProp{Id= 1, Key = "Color", Value = "Red"},
+                        new ProductProp{Id= 1, Key = "Size", Value = "20cm"},
+                        new ProductProp{Id= 1, Key = "Flavor", Value = "Apple"}
+                    }
+            });
+
+    }
+}
