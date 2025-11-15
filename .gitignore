@@ -1,0 +1,13 @@
+# Ignorar pasta bin e obj (C#)
+bin/
+obj/
+
+# Ignorar arquivos temporários
+*.log
+*.tmp
+
+# Ignorar arquivos de build
+/build/
+
+# Ignorar configurações locais do VSCode
+.vscode/
