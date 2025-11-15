@@ -1,4 +1,0 @@
-<Solution>
-  <Project Path="BlazorMultPlataforma/BlazorMultPlataforma.csproj" />
-  <Project Path="WinformBlazor/WinFormsBlazor.csproj" />
-</Solution>
