@@ -18,12 +18,21 @@
                     <p>@propertie.Key : @propertie.Value</p>
                 }
             }
+            <input type="button" class="btn btn-danger" value="Delete" @onclick="()=> DeleteProduct(product.IdProduct)" />
         </div>
     }
 </div>
 
 @code {
     private List<Product> listProducts = new();
+
+    private void DeleteProduct(int productId)
+    {
+        var product = listProducts.FirstOrDefault(p => p.IdProduct==productId);
+        if (product is null) return;
+
+        listProducts.Remove(product);
+    }
 
     protected override void OnInitialized()
     {
