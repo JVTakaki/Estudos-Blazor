@@ -1,0 +1,16 @@
+﻿
+<br />
+<input type="button" class="btn btn-danger" value="Delete - @Product.Name" @onclick="() => DeleteProduct(Product.IdProduct)" />
+
+@code {
+    [Parameter]
+    public Product Product { get; set; }
+    [Parameter]
+    public List<Product> Products { get; set; } = new();
+
+    private void DeleteProduct(int productId)
+    {
+        Products.Remove(Product);
+        Product.IsActive = false;
+    }
+}

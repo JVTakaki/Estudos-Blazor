@@ -2,37 +2,14 @@
 
 <div class="row">
     <h3 class="text-bg-primary">Demo Product</h3>
-    @for (int i = 0; i < listProducts.Count; i++)
+    @foreach(var product in listProducts)
     {
-        var product = listProducts[i];
-        <div class="col-6 border bg-body-secondary p-1">
-            <h4 class="text-primary">
-                Product - @(i + 1)
-            </h4>
-            Name - @product.Name <br />
-            Show properties: <input type="checkbox" @bind="product.ShowProperties" />
-            @if(product.ShowProperties)
-            {
-                @foreach(var propertie in product.ProductProp)
-                {
-                    <p>@propertie.Key : @propertie.Value</p>
-                }
-            }
-            <input type="button" class="btn btn-danger" value="Delete" @onclick="()=> DeleteProduct(product.IdProduct)" />
-        </div>
+        <_IndividualProductComponent Product="product"></_IndividualProductComponent>
     }
 </div>
 
 @code {
     private List<Product> listProducts = new();
-
-    private void DeleteProduct(int productId)
-    {
-        var product = listProducts.FirstOrDefault(p => p.IdProduct==productId);
-        if (product is null) return;
-
-        listProducts.Remove(product);
-    }
 
     protected override void OnInitialized()
     {

@@ -1,0 +1,20 @@
+﻿<div class="col-6 border bg-body-secondary p-1">
+    <h4 class="text-primary">
+        Product - @Product.IdProduct
+    </h4>
+    Name - @Product.Name <br />
+    Show properties: <input type="checkbox" @bind="Product.ShowProperties" />
+    @if (Product.ShowProperties)
+    {
+        @foreach (var propertie in Product.ProductProp)
+        {
+            <h6>@propertie.Key : @propertie.Value</h6>
+        }
+    }
+    <_DeleteButtonComponent Product="Product"></_DeleteButtonComponent>
+</div>
+
+@code {
+    [Parameter]
+    public Product Product { get; set; } = new();
+}
