@@ -1,0 +1,18 @@
+﻿<div>
+    <div class="alert alert-info">
+        @Title
+    </div>
+    @if(ChildContent is not null){
+        <div class="alert alert-warning">
+            @ChildContent
+        </div>
+    }
+    <button class="btn btn-outline-danger">Click me!</button>
+</div>
+
+@code {
+    [Parameter]
+    public string Title { get; set; }
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+}
