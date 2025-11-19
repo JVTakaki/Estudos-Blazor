@@ -3,13 +3,13 @@
 <div class="row">
     <div class="col-6 border p-3">
         <h3 class="text-primary">Product Playground</h3>
-        Is Active: <input type="checkbox" @bind="@Product.IsActive" /> <br />
+        Is Active: <input type="checkbox" @bind="@_product.IsActive" /> <br />
         Input Price:
-        <input type="number" @bind-value="@Product.Price" @bind-value:event="oninput" />
+        <input type="number" @bind-value="@_product.Price" @bind-value:event="oninput" />
         <br />
         Product Properties:
-        <select @bind="selectedProp">
-            @foreach (var prop in @Product.ProductProp)
+        <select @bind="_selectedProp">
+            @foreach (var prop in _product.ProductProp)
             {
                 <option value="@prop.Key">@prop.Key</option>
             }
@@ -19,13 +19,13 @@
     <div class="col-6 border p-3">
         <h3 class="text-primary">Product Summary</h3>
 
-        Name : @Product.Name <br />
-        IsActive: @Product.IsActive <br />
-        Price: @Product.Price <br />
-        This product is: @(Product.IsActive ? "Active" : "InActive") <br />
-        Selected Prop: @selectedProp <br />
-        @if (!string.IsNullOrWhiteSpace(selectedProp)){
-            <p>Selected value: @Product.ProductProp.FirstOrDefault(u => u.Key == selectedProp).Value</p>
+        Name : @_product.Name <br />
+        IsActive: @_product.IsActive <br />
+        Price: @_product.Price <br />
+        This product is: @(_product.IsActive ? "Active" : "InActive") <br />
+        Selected Prop: @_selectedProp <br />
+        @if (!string.IsNullOrWhiteSpace(_selectedProp)){
+            <p>Selected value: @_product.ProductProp.FirstOrDefault(u => u.Key == _selectedProp)!.Value</p>
         }
     </div>
     <div class="col-12 p-4">
@@ -45,7 +45,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var product in productsList)
+                @foreach (var product in _productsList)
                 {
                     <tr>
                         <td>
@@ -65,7 +65,7 @@
     <h3 class="text-bg-primary"> 
         Products Sumary
     </h3>
-    @foreach (var product in productsList)
+    @foreach (var product in _productsList)
     {
         <div class="col-3">
             <div class="border p-1 m-1">
@@ -79,11 +79,11 @@
 </div>
 
 @code {
-    private string selectedProp = "";
+    private string _selectedProp = "";
 
-    private List<Product> productsList = new();
+    private readonly List<Product> _productsList = [];
 
-    Product Product = new()
+    readonly Product _product = new()
         {
             IdProduct = 1,
             Name = "Banana",
@@ -91,29 +91,29 @@
             Price = 5,
             ProductProp = new List<ProductProp>()
             {
-                new ProductProp{Id= 1, Key = "Color", Value = "Blue"},
-                new ProductProp{Id= 1, Key = "Size", Value = "20cm"},
-                new ProductProp{Id= 1, Key = "Flavor", Value = "Banana"}
+                new() {Id= 1, Key = "Color", Value = "Blue"},
+                new() {Id= 1, Key = "Size", Value = "20cm"},
+                new() {Id= 1, Key = "Flavor", Value = "Banana"}
             }
         };
 
     protected override void OnInitialized()
     {
-        productsList.Add(Product);
-        productsList.Add(new()
-            {
+        _productsList.Add(_product);
+        _productsList.Add(new Product
+        {
                 IdProduct = 2,
                 Name = "Apple",
                 IsActive = false,
                 Price = 4,
                 ProductProp = new List<ProductProp>()
                     {
-                        new ProductProp{Id= 1, Key = "Color", Value = "Red"},
-                        new ProductProp{Id= 1, Key = "Size", Value = "20cm"},
-                        new ProductProp{Id= 1, Key = "Flavor", Value = "Apple"}
+                        new() {Id= 1, Key = "Color", Value = "Red"},
+                        new() {Id= 1, Key = "Size", Value = "20cm"},
+                        new() {Id= 1, Key = "Flavor", Value = "Apple"}
                     }
             });
-        productsList.Add(new()
+        _productsList.Add(new Product
         {
             IdProduct = 3,
             Name = "Pear",
@@ -121,12 +121,12 @@
             Price = 4,
             ProductProp = new List<ProductProp>()
                     {
-                        new ProductProp{Id= 1, Key = "Color", Value = "Red"},
-                        new ProductProp{Id= 1, Key = "Size", Value = "20cm"},
-                        new ProductProp{Id= 1, Key = "Flavor", Value = "Apple"}
+                        new() {Id= 1, Key = "Color", Value = "Red"},
+                        new() {Id= 1, Key = "Size", Value = "20cm"},
+                        new() {Id= 1, Key = "Flavor", Value = "Apple"}
                     }
         });
-        productsList.Add(new()
+        _productsList.Add(new Product
         {
             IdProduct = 4,
             Name = "Pineapple",
@@ -134,9 +134,9 @@
             Price = 4,
             ProductProp = new List<ProductProp>()
                     {
-                        new ProductProp{Id= 1, Key = "Color", Value = "Red"},
-                        new ProductProp{Id= 1, Key = "Size", Value = "20cm"},
-                        new ProductProp{Id= 1, Key = "Flavor", Value = "Apple"}
+                        new() {Id= 1, Key = "Color", Value = "Red"},
+                        new() {Id= 1, Key = "Size", Value = "20cm"},
+                        new() {Id= 1, Key = "Flavor", Value = "Apple"}
                     }
         });
     }

@@ -3,7 +3,7 @@
 <div class="row">
     <h3 class="text-bg-primary">Demo Product</h3>
     <p>Favorite Count: @FavoriteCount</p>
-    @foreach(var product in listProducts)
+    @foreach(var product in _listProducts)
     {
         <_IndividualProductComponent Product="product" OnFavoriteUpdated="FavoriteCountChange"
             OnSelectedProductChange="UpdateSelectedProduct"></_IndividualProductComponent>
@@ -14,13 +14,13 @@
 </div>
 
 @code {
-    private List<Product> listProducts = new();
-    public int FavoriteCount { get; set; } = 0;
+    private readonly List<Product> _listProducts = [];
+    public int FavoriteCount { get; set; }
     public string SelectedProduct { get; set; } = string.Empty;
 
     protected override void OnInitialized()
     {
-        listProducts.Add(new()
+        _listProducts.Add(new Product
         {
             IdProduct = 2,
             Name = "Apple",
@@ -29,12 +29,12 @@
             ShowProperties = true,
             ProductProp = new List<ProductProp>()
                     {
-                        new ProductProp{Id= 1, Key = "Color", Value = "Red"},
-                        new ProductProp{Id= 1, Key = "Size", Value = "20cm"},
-                        new ProductProp{Id= 1, Key = "Flavor", Value = "Apple"}
+                        new() {Id= 1, Key = "Color", Value = "Red"},
+                        new() {Id= 1, Key = "Size", Value = "20cm"},
+                        new() {Id= 1, Key = "Flavor", Value = "Apple"}
                     }
         });
-        listProducts.Add(new()
+        _listProducts.Add(new Product
         {
             IdProduct = 3,
             Name = "Pear",
@@ -42,12 +42,12 @@
             Price = 4,
             ProductProp = new List<ProductProp>()
                     {
-                        new ProductProp{Id= 1, Key = "Color", Value = "Red"},
-                        new ProductProp{Id= 1, Key = "Size", Value = "20cm"},
-                        new ProductProp{Id= 1, Key = "Flavor", Value = "Apple"}
+                        new() {Id= 1, Key = "Color", Value = "Red"},
+                        new() {Id= 1, Key = "Size", Value = "20cm"},
+                        new() {Id= 1, Key = "Flavor", Value = "Apple"}
                     }
         });
-        listProducts.Add(new()
+        _listProducts.Add(new Product
         {
             IdProduct = 4,
             Name = "Pineapple",
@@ -55,9 +55,9 @@
             Price = 4,
             ProductProp = new List<ProductProp>()
                     {
-                        new ProductProp{Id= 1, Key = "Color", Value = "Red"},
-                        new ProductProp{Id= 1, Key = "Size", Value = "20cm"},
-                        new ProductProp{Id= 1, Key = "Flavor", Value = "Apple"}
+                        new() {Id= 1, Key = "Color", Value = "Red"},
+                        new() {Id= 1, Key = "Size", Value = "20cm"},
+                        new() {Id= 1, Key = "Flavor", Value = "Apple"}
                     }
         });
     }

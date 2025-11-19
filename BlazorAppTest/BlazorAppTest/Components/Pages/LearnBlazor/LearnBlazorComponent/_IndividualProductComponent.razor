@@ -30,5 +30,5 @@
         await OnSelectedProductChange.InvokeAsync(productName);
 
     public async Task FavoriteUpdated(ChangeEventArgs e) => 
-        await OnFavoriteUpdated.InvokeAsync(e.Value is null ? false : (bool)e.Value);
+        await OnFavoriteUpdated.InvokeAsync(e.Value is not null && (bool)e.Value);
 }

@@ -2,13 +2,22 @@
 
 <h3>ParentComponent</h3>
 
-<_ChildComponent Title="Banana">
-    Banana azul
-</_ChildComponent>
+<CascadingValue Value="@MessageForGrandChild" Name="Message">
+    <CascadingValue Value="@LuckyNumber" Name="LuckyNumber">
+        <_ChildComponent OnButttonClick="ShowMessage" Title="Banana">
+            <ChildSomeContent>Banana azul</ChildSomeContent>
+            <ChildMoreContent>@MessageText</ChildMoreContent>
+        </_ChildComponent>
+    </CascadingValue>
+</CascadingValue>
 
-<_ChildComponent Title="Banana">
-
-</_ChildComponent>
 @code {
+    public string MessageText = string.Empty;
 
+    private void ShowMessage() =>
+        MessageText = "Button inside child component was clicked!";
+
+    public string MessageForGrandChild = "Rosas são vermelhas; Violetas são azuios";
+    public int LuckyNumber = 7;
 }
+ 

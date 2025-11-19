@@ -2,17 +2,22 @@
     <div class="alert alert-info">
         @Title
     </div>
-    @if(ChildContent is not null){
+    @if (ChildSomeContent is not null)
+    {
         <div class="alert alert-warning">
-            @ChildContent
+            @ChildSomeContent <br/>
+            @ChildMoreContent
         </div>
     }
-    <button class="btn btn-outline-danger">Click me!</button>
+    
+    <_GrandChildComponent></_GrandChildComponent>
+
+    <button class="btn btn-outline-danger" @onclick="OnButttonClick">Click me!</button>
 </div>
 
 @code {
-    [Parameter]
-    public string Title { get; set; }
-    [Parameter]
-    public RenderFragment ChildContent { get; set; }
+    [Parameter] public string? Title { get; set; }
+    [Parameter] public RenderFragment? ChildSomeContent { get; set; }
+    [Parameter] public RenderFragment? ChildMoreContent { get; set; }
+    [Parameter] public EventCallback OnButttonClick { get; set; }
 }
